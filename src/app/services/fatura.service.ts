@@ -20,4 +20,8 @@ export class FaturaService {
     });
     return this.http.request(req);
   }
+
+  obterFaturas(): Observable<unknown> {
+    return this.http.get(`${this.base}/LeitorFaturaCsv/obtercontas`);
+  }
 }

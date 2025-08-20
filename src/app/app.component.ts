@@ -26,6 +26,7 @@ export class AppComponent {
       agrupar: [false],
     });
 
+    this.api.obterFaturas().subscribe(faturas => console.log('faturas', faturas));
   }
 
   onFileChange(ev: Event) {
