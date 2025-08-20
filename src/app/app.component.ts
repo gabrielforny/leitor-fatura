@@ -1,5 +1,5 @@
 // src/app/app.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { HttpEventType } from '@angular/common/http';
 import { NgIf, JsonPipe } from '@angular/common';
@@ -12,11 +12,12 @@ import { FaturaService } from './services/fatura.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Leitor de Fatura CSV';
   progress = 0;
   loading = false;
   resultado: unknown = null;
+  resultadoFaturas: unknown = null;
   erro: string | null = null;
   form: FormGroup
 
@@ -25,8 +26,18 @@ export class AppComponent {
       file: [null as File | null, [Validators.required]],
       agrupar: [false],
     });
+  }
 
-    this.api.obterFaturas().subscribe(faturas => console.log('faturas', faturas));
+  ngOnInit(): void {
+    this.api.obterFaturas()
+      .subscribe({
+        next: (event: any) => {
+          this.loading = false;
+          this.resultadoFaturas = event.body;
+          console.log("Resultado da chamada: ", this.resultado);
+        }
+      });
+
   }
 
   onFileChange(ev: Event) {
@@ -47,7 +58,6 @@ export class AppComponent {
     this.api.enviarCsv(this.form.value.file!, !!this.form.value.agrupar)
       .subscribe({
         next: (event) => {
-          console.log("Retorno da chamada: ", event);
           if (event.type === HttpEventType.UploadProgress && event.total) {
             this.progress = Math.round((event.loaded / event.total) * 100);
           } else if (event.type === HttpEventType.Response) {

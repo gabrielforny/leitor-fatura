@@ -1,6 +1,12 @@
 <div class="container">
   <h1>{{ title }}</h1>
 
+  <div class="resultado">
+    <h2>Faturas</h2>
+    <pre>{{ resultadoFaturas | json }}</pre>
+  </div>
+
+
   <form (ngSubmit)="enviar()" [formGroup]="form" novalidate>
     <div class="field">
       <label for="file">Arquivo CSV</label>
@@ -20,7 +26,9 @@
 
   <div *ngIf="loading" class="progress">
     Enviando: {{progress}}%
-    <div class="bar"><div class="bar-fill" [style.width.%]="progress"></div></div>
+    <div class="bar">
+      <div class="bar-fill" [style.width.%]="progress"></div>
+    </div>
   </div>
 
   <div *ngIf="erro" class="error">{{ erro }}</div>
