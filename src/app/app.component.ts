@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       .subscribe({
         next: (event: any) => {
           this.loading = false;
-          this.resultadoFaturas = event.body;
+          this.resultadoFaturas = event;
           console.log("Resultado da chamada: ", this.resultado);
         }
       });
