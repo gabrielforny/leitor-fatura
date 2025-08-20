@@ -15,7 +15,7 @@ export class FaturaService {
     form.append('Agrupar', String(agrupar));
 
     console.log('Chamando Backend....')
-    const req = new HttpRequest('POST', `https://leitorfaturacsv-1.onrender.com/LeitorFaturaCsv`, form, {
+    const req = new HttpRequest('POST', `${this.base}/LeitorFaturaCsv`, form, {
       reportProgress: true
     });
     return this.http.request(req);
