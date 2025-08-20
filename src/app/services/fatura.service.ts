@@ -14,6 +14,7 @@ export class FaturaService {
     form.append('File', file);
     form.append('Agrupar', String(agrupar));
 
+    console.log('Chamando Backend....')
     const req = new HttpRequest('POST', `${this.base}/LeitorFaturaCsv`, form, {
       reportProgress: true
     });

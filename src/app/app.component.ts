@@ -46,11 +46,14 @@ export class AppComponent {
     this.api.enviarCsv(this.form.value.file!, !!this.form.value.agrupar)
       .subscribe({
         next: (event) => {
+          console.log("Retorno da chamada: ", event);
           if (event.type === HttpEventType.UploadProgress && event.total) {
             this.progress = Math.round((event.loaded / event.total) * 100);
           } else if (event.type === HttpEventType.Response) {
             this.loading = false;
             this.resultado = event.body;
+            console.log("Resultado da chamada: ", this.resultado);
+
           }
         },
         error: (err) => {
