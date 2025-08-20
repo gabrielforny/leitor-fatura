@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+
+  <form (ngSubmit)="enviar()" [formGroup]="form" novalidate>
+    <div class="field">
+      <label for="file">Arquivo CSV</label>
+      <input id="file" type="file" accept=".csv,text/csv" (change)="onFileChange($event)" />
+    </div>
+
+    <div class="field-row">
+      <label class="checkbox">
+        <input type="checkbox" formControlName="agrupar" />
+        Agrupar
+      </label>
+
+      <button type="submit" [disabled]="form.invalid || loading">Enviar</button>
+      <button type="button" class="secondary" (click)="resetar()">Limpar</button>
+    </div>
+  </form>
+
+  <div *ngIf="loading" class="progress">
+    Enviando: {{progress}}%
+    <div class="bar"><div class="bar-fill" [style.width.%]="progress"></div></div>
+  </div>
+
+  <div *ngIf="erro" class="error">{{ erro }}</div>
+
+  <div *ngIf="resultado" class="resultado">
+    <h2>Resultado</h2>
+    <pre>{{ resultado | json }}</pre>
+  </div>
+</div>
