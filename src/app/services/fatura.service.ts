@@ -15,13 +15,13 @@ export class FaturaService {
     form.append('Agrupar', String(agrupar));
 
     console.log('Chamando Backend....')
-    const req = new HttpRequest('POST', `${this.base}/LeitorFaturaCsv`, form, {
+    const req = new HttpRequest('POST', `https://leitorfaturacsv-1.onrender.com/LeitorFaturaCsv`, form, {
       reportProgress: true
     });
     return this.http.request(req);
   }
 
   obterFaturas(): Observable<unknown> {
-    return this.http.get(`${this.base}/LeitorFaturaCsv/obtercontas`);
+    return this.http.get(`https://leitorfaturacsv-1.onrender.com/LeitorFaturaCsv/obtercontas`);
   }
 }
