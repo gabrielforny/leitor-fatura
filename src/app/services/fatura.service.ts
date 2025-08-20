@@ -13,7 +13,7 @@ export class FaturaService {
     form.append('File', file);
     form.append('Agrupar', String(agrupar));
 
-    const req = new HttpRequest('POST', `${this.base}/LeitorFaturaCsv`, form, {
+    const req = new HttpRequest('POST', `/LeitorFaturaCsv`, form, {
       reportProgress: true
     });
     return this.http.request(req);
