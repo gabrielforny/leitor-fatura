@@ -1,0 +1,11 @@
+{
+    "/api": {
+        "target": "https://leitorfaturacsv-1.onrender.com",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        },
+        "logLevel": "debug"
+    }
+}
